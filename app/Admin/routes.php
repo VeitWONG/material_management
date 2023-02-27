@@ -11,9 +11,11 @@ Route::group([
     'namespace'  => config('admin.route.namespace'),
     'middleware' => config('admin.route.middleware'),
 ], function (Router $router) {
-
     $router->get('/', 'HomeController@index');
     $router->resource('material','MaterialInformationController');
     $router->resource('supplier','SupplierInformationController');
     $router->resource('inventory','InventoryController');
+    $router->resource('inventoryexchange','InventoryExchangeController');
+    $router->resource('subscription','SubscriptionController');
+    $router->resource('claim','ClaimController');
 });

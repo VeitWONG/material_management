@@ -14,10 +14,13 @@ class inventoryTable extends LazyRenderable
        
         return Grid::make(new Inventory(), function (Grid $grid) {
 
-            
+            //$grid->rowSelector()->style('danger');
             $grid->setResource('inventory');
             $grid->disableActions(); //关闭操作按钮
             $grid->column('id')->sortable();
+            $grid->column('quantity','库存量');
+            $grid->column('inventory_batches','库存批次');
+            
             $grid->model()->where('material_id',"=",$this->payload['id'] ?? '');
             
           
@@ -39,31 +42,4 @@ class inventoryTable extends LazyRenderable
     }
 
     
-
-
-    
-    protected function form(): Form
-    {
-        return Form::make(new Inventory(), function (Form $form) {
-            $form->display('id');
-        
-            $form->display('created_at');
-            $form->display('updated_at');
-        });
-    }
-
-    /*
-    protected function detail($id)
-    {
-        return Show::make($id, new Asset(), function (Show $show) {
-            $show->field('id');
-            $show->field('name');
-            $show->field('age');
-            $show->field('gender');
-            $show->field('calss');
-            $show->field('created_at');
-            $show->field('updated_at');
-        });
-    }
-    */
 }

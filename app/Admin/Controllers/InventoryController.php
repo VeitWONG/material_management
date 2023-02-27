@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Renderable\inventoryexchangeTable;
 use App\Admin\Repositories\Inventory;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
@@ -11,17 +12,28 @@ use Dcat\Admin\Http\Controllers\AdminController;
 class InventoryController extends AdminController
 {
     /**
-     * Make a grid builder.
+     * 创建表格.
      *
      * @return Grid
      */
     protected function grid()
     {
         return Grid::make(new Inventory(), function (Grid $grid) {
+            
+            $grid->model()->with(['inventoryexchange']);
+            //$grid->model()->with(['']);
             $grid->column('id')->sortable();
             $grid->column('material_id');
             $grid->column('quantity');
             $grid->column('inventory_batches');
+            $grid->column('库存往来')->display('查看')->modal(function (Grid\Displayers\Modal $modal) {
+                // 标题
+                $modal->title('资材列表');
+                // 自定义图标
+                $modal->icon('feather icon-edit');
+                // 传递当前行字段值
+                return inventoryExchangeTable::make()->payload(['id' => $this->id]);
+            });
             $grid->column('created_at');
             $grid->column('updated_at')->sortable();
         
@@ -29,11 +41,14 @@ class InventoryController extends AdminController
                 $filter->equal('id');
         
             });
+            
+            $grid->enableDialogCreate();
+            $grid->addTableClass('table-text-center'); //列居中
         });
     }
 
     /**
-     * Make a show builder.
+     * 创建详情表单.
      *
      * @param mixed $id
      *
@@ -43,7 +58,7 @@ class InventoryController extends AdminController
     {
         return Show::make($id, new Inventory(), function (Show $show) {
             $show->field('id');
-            $show->field('material_id');
+            $show->field('masterial.id','资材名称');
             $show->field('quantity');
             $show->field('inventory_batches');
             $show->field('created_at');
@@ -52,7 +67,7 @@ class InventoryController extends AdminController
     }
 
     /**
-     * Make a form builder.
+     * 创建新增表单.
      *
      * @return Form
      */
@@ -62,7 +77,7 @@ class InventoryController extends AdminController
             $form->display('id');
             $form->text('material_id');
             $form->text('quantity');
-            $form->text('inventory_batches');
+            $form->text('inventory_batches')->value(date('Ymd').str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT));
         
             $form->display('created_at');
             $form->display('updated_at');

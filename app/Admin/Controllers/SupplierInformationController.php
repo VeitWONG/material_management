@@ -35,7 +35,7 @@ class SupplierInformationController extends AdminController
                 // 传递当前行字段值
                 return materialTable::make()->payload(['id' => $this->id]);
             });
-            $grid->column('created_at','录制时间');
+            $grid->column('created_at','录入时间');
             $grid->column('updated_at','最近更新时间')->sortable();
             $grid->addTableClass('table-text-center');
         
