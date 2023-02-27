@@ -1,0 +1,8 @@
+供应商-资材中间关系表
+CREATE TABLE `supplier_material` (
+  `supplier_id` int(11) NOT NULL,
+  `material_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  KEY `supplier_material_supplier_id_material_id_index` (`supplier_id`,`material_id`)
+)
