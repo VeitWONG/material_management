@@ -67,26 +67,17 @@ class InventoryExchangeController extends AdminController
     protected function form()
     {
         return Form::make(new InventoryExchange(), function (Form $form) {
-            $options =[
-                1=>'入库',
-                2=>'出库'
-            ];
+            
             $form->display('id');
             $form->text('inventory_id');
-            //$form >radio( Radio::make($name,$options)->check(1));
-            $form->radio('往来类型')
-            ->when(1,function (Form $form){
-                $form->text('inbound_order')->default('IB'.date('Ymd'));
-            })->when(2,function(Form $form){
-                $form->text('inbound_order')->default('OB'.date('Ymd'));
-            })
-            ->options($options)->default(1);
-            $form->ignore('往来类型');
+
+            //$form->ignore("往来类型");
             $form->text('quantity_received');
             $form->text('acceptance_at')->value(date("Ymd"));
         
             $form->display('created_at');
             $form->display('updated_at');
+            
         });
     }
 }
