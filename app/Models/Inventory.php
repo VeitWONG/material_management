@@ -15,4 +15,9 @@ class Inventory extends Model
     {
         return $this->belongsTo(MaterialInformation::class);
     }
+
+    public function InventoryExchange()
+    {
+        return $this->hasMany(InventoryExchange::class);
+    }
 }
