@@ -7,12 +7,14 @@ use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Grid\LazyRenderable;
 
-class materialTable extends LazyRenderable
+class materialTable2 extends LazyRenderable
 {
-    //供应商关联时使用此表格
+    //资材申购时使用此表格
     public function grid():Grid
     {
         //获取外部传递的参数
+        
+        
         return Grid::make(new MaterialInformation(['supplierinformation']), function (Grid $grid) {
 
             //$grid->supplierinformation('供应商ID')->pluck('id')->limit(true)->implode('');
@@ -28,10 +30,6 @@ class materialTable extends LazyRenderable
             $grid->column('m_unit','单位');
             $grid->column('m_description','说明');
             $grid->column('m_price','单价');
-            // 关联资材表显示
-            $grid->model()->join('supplier_material',function ($join) use ($grid){
-                $join->on('supplier_material.material_id','id')->where('supplier_id','=',$this->payload['id'] ?? '');
-            });
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id')->width(4);
                 $filter->equal('m_byword','代号')->width(4);
@@ -50,42 +48,6 @@ class materialTable extends LazyRenderable
             $grid->paginate(10);
             $grid->showCreateButton();
             $grid->withBorder(true);
-
         });
     }
-
-    
-
-
-    /*
-    protected function form(): Form
-    {
-        return Form::make(new MaterialInformation(), function (Form $form) {
-            $form->display('id');
-            $form->text('name');
-            $form->text('age');
-            $form->text('gender');
-            $form->text('calss');
-            $form->text('A');
-        
-            $form->display('created_at');
-            $form->display('updated_at');
-        });
-    }
-    */
-
-    /*
-    protected function detail($id)
-    {
-        return Show::make($id, new Asset(), function (Show $show) {
-            $show->field('id');
-            $show->field('name');
-            $show->field('age');
-            $show->field('gender');
-            $show->field('calss');
-            $show->field('created_at');
-            $show->field('updated_at');
-        });
-    }
-    */
 }

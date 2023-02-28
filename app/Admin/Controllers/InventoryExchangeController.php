@@ -56,8 +56,6 @@ class InventoryExchangeController extends AdminController
             $show->field('inbound_order');
             $show->field('quantity_received');
             $show->field('acceptance_at');
-            $show->field('created_at');
-            $show->field('updated_at');
         });
     }
 
@@ -73,12 +71,8 @@ class InventoryExchangeController extends AdminController
             
             $form->display('id');
             $form->text('inventory_id');
-            $form->text('inbound_order');
-
-            $form->number('quantity_received');
-            $form->text('acceptance_at')->value(date("Ymd"));
-            $form->display('created_at');
-            $form->display('updated_at');
+            $form->number('quantity_received')->width(8);
+            $form->datetime('acceptance_at')->width(5);
             
             /*
             $form->submitted(function (Form $form){

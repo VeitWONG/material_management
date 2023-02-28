@@ -3,8 +3,11 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Renderable\inventoryExchangeTable;
+use App\Admin\Renderable\materialTable;
+use App\Admin\Renderable\materialTable2;
 use App\Admin\Repositories\Subscription;
 use App\Models\InventoryExchange;
+use Dcat\Admin\Admin;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
@@ -21,7 +24,7 @@ class SubscriptionController extends AdminController
     {
         return Grid::make(new Subscription(), function (Grid $grid) {
             $grid->column('id')->sortable();
-            $grid->column('inventory_exchanges_id','库存往来单号');
+            $grid->column('material_id');
             $grid->column('requisition_orders');
             $grid->column('applicant');
             $grid->column('request_time');
@@ -35,6 +38,7 @@ class SubscriptionController extends AdminController
                 $filter->equal('id');
         
             });
+            $grid->enableDialogCreate();
         });
     }
 
@@ -49,7 +53,7 @@ class SubscriptionController extends AdminController
     {
         return Show::make($id, new Subscription(), function (Show $show) {
             $show->field('id');
-            $show->field('inventory_exchanges_id');
+            $show->field('material_id');
             $show->field('requisition_orders');
             $show->field('applicant');
             $show->field('request_time');
@@ -71,20 +75,21 @@ class SubscriptionController extends AdminController
         return Form::make(new Subscription(), function (Form $form) {
             $form->confirm('您确定要提交表单吗？');
             $form->display('id');
-            $form->selectTable('inventory_exchanges_id','库存往来单号')
-            ->title('库存往来列表')
-            ->from(inventoryExchangeTable::make()->payload(['id' => '']))//inventory_exchange,id传递空值，以显示所有往来账单
-            ->model(InventoryExchange::class,'id','inbound_order');
+            $form->selectTable('material_id','申购资材')
+            ->title('资材信息表')
+            ->from(materialTable2::make()->payload(['id' => '']))
+            ->model(MaterialInformation::class,'id','m_type');
 
             $form->text('requisition_orders')->value('SG'.date('Ymd'));
-            $form->text('applicant');
+            $form->text('applicant')->default(Admin::user()->username);
             $form->datetime('request_time');
-            $form->number('quantity');
+            $form->number('quantity')->default(1);
             $form->text('m_byword');
             $form->text('order_status');
 
             $form->display('created_at');
             $form->display('updated_at');
+            
         });
     }
 }

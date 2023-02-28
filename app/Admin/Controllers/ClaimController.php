@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Admin\Renderable\inventoryExchangeTable;
 use App\Admin\Repositories\Claim;
+use Dcat\Admin\Admin;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
@@ -32,6 +33,7 @@ class ClaimController extends AdminController
                 $filter->equal('id');
         
             });
+            $grid->enableDialogCreate();
         });
     }
 
@@ -72,7 +74,7 @@ class ClaimController extends AdminController
             ->model(InventoryExchange::class,'id','inbound_order');
 
             $form->text('claim_orders');
-            $form->text('applicant');
+            $form->text('applicant')->default(Admin::user()->username);
             $form->text('quantity');
             $form->datetime('request_at');
         
