@@ -2,7 +2,9 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Renderable\inventoryExchangeTable;
 use App\Admin\Repositories\Subscription;
+use App\Models\InventoryExchange;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
@@ -11,7 +13,7 @@ use Dcat\Admin\Http\Controllers\AdminController;
 class SubscriptionController extends AdminController
 {
     /**
-     * Make a grid builder.
+     * 创建表格.
      *
      * @return Grid
      */
@@ -19,7 +21,7 @@ class SubscriptionController extends AdminController
     {
         return Grid::make(new Subscription(), function (Grid $grid) {
             $grid->column('id')->sortable();
-            $grid->column('inventory_exchanges_id');
+            $grid->column('inventory_exchanges_id','库存往来单号');
             $grid->column('requisition_orders');
             $grid->column('applicant');
             $grid->column('request_time');
@@ -37,7 +39,7 @@ class SubscriptionController extends AdminController
     }
 
     /**
-     * Make a show builder.
+     * 创建详情表单.
      *
      * @param mixed $id
      *
@@ -60,22 +62,27 @@ class SubscriptionController extends AdminController
     }
 
     /**
-     * Make a form builder.
+     * 创建新增表单.
      *
      * @return Form
      */
     protected function form()
     {
         return Form::make(new Subscription(), function (Form $form) {
+            $form->confirm('您确定要提交表单吗？');
             $form->display('id');
-            $form->text('inventory_exchanges_id');
-            $form->text('requisition_orders');
+            $form->selectTable('inventory_exchanges_id','库存往来单号')
+            ->title('库存往来列表')
+            ->from(inventoryExchangeTable::make()->payload(['id' => '']))//inventory_exchange,id传递空值，以显示所有往来账单
+            ->model(InventoryExchange::class,'id','inbound_order');
+
+            $form->text('requisition_orders')->value('SG'.date('Ymd'));
             $form->text('applicant');
-            $form->text('request_time');
-            $form->text('quantity');
+            $form->datetime('request_time');
+            $form->number('quantity');
             $form->text('m_byword');
             $form->text('order_status');
-        
+
             $form->display('created_at');
             $form->display('updated_at');
         });

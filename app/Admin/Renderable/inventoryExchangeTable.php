@@ -16,7 +16,10 @@ class inventoryExchangeTable extends LazyRenderable
             $grid->setResource('inventoryexchange');
             
             $grid->disableActions(); //关闭操作按钮
-            $grid->model()->where('inventory_id','=',$this->payload['id'] ?? '');
+            if ($this->payload['id'] != ''){
+                $grid->model()->where('inventory_id','=',$this->payload['id']);
+            }
+            
             $grid->column('inventory_id','库存ID');
             $grid->column('inbound_order','出入库单号');
             $grid->column('quantity_received','出入库总数');
@@ -27,6 +30,7 @@ class inventoryExchangeTable extends LazyRenderable
             //筛选器
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id')->width(4);
+                $filter->equal('inbound_order')->width(5);
             });
             $grid->enableDialogCreate();
             $grid->showBatchDelete();

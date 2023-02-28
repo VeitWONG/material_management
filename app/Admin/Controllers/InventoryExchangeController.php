@@ -6,9 +6,11 @@ use App\Admin\Repositories\InventoryExchange;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Grid\Displayers\Button;
+use Dcat\Admin\Grid\Filter\Where;
 use Dcat\Admin\Show;
 use Dcat\Admin\Http\Controllers\AdminController;
 use Dcat\Admin\Widgets\Dropdown;
+use Dcat\Admin\Widgets\Metrics\Card;
 use Dcat\Admin\Widgets\Radio;
 use Symfony\Component\Translation\Dumper\YamlFileDumper;
 
@@ -68,16 +70,21 @@ class InventoryExchangeController extends AdminController
     {
         return Form::make(new InventoryExchange(), function (Form $form) {
             
+            
             $form->display('id');
             $form->text('inventory_id');
+            $form->text('inbound_order');
 
-            //$form->ignore("往来类型");
-            $form->text('quantity_received');
+            $form->number('quantity_received');
             $form->text('acceptance_at')->value(date("Ymd"));
-        
             $form->display('created_at');
             $form->display('updated_at');
             
+            /*
+            $form->submitted(function (Form $form){
+                return $form->response()->error("哦唷,出错咯~");
+            });
+            */
         });
     }
 }

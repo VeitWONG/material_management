@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Renderable\inventoryExchangeTable;
 use App\Admin\Repositories\Claim;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
@@ -11,7 +12,7 @@ use Dcat\Admin\Http\Controllers\AdminController;
 class ClaimController extends AdminController
 {
     /**
-     * Make a grid builder.
+     * 创建表格
      *
      * @return Grid
      */
@@ -35,7 +36,7 @@ class ClaimController extends AdminController
     }
 
     /**
-     * Make a show builder.
+     * 创建详情表单
      *
      * @param mixed $id
      *
@@ -56,19 +57,24 @@ class ClaimController extends AdminController
     }
 
     /**
-     * Make a form builder.
+     * 创建新增表单
      *
      * @return Form
      */
     protected function form()
     {
         return Form::make(new Claim(), function (Form $form) {
+            $form->confirm('您确定要提交表单吗？');
             $form->display('id');
-            $form->text('inventory_exchanges_id');
+            $form->selectTable('inventory_exchanges_id','库存往来单号')
+            ->title('库存往来列表')
+            ->from(inventoryExchangeTable::make()->payload(['id' => '']))//inventory_exchange,id传递空值，以显示所有往来账单
+            ->model(InventoryExchange::class,'id','inbound_order');
+
             $form->text('claim_orders');
             $form->text('applicant');
             $form->text('quantity');
-            $form->text('request_at');
+            $form->datetime('request_at');
         
             $form->display('created_at');
             $form->display('updated_at');
