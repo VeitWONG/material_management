@@ -11,7 +11,6 @@ class MaterialInformation extends Model
 {
 	use HasDateTimeFormatter;
     protected $table = 'material_information';
-    
     public function SupplierInformation(): BelongsToMany
     {
         $pivotTable = 'supplier_material'; // 中间表
@@ -20,8 +19,14 @@ class MaterialInformation extends Model
         return $this->belongsToMany($relatedModel,$pivotTable,'material_id','supplier_id');
     }
 
-    public function inventory()
+    public function Subscription()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    public function Inventory()
     {
         return $this->hasMany(Inventory::class);
     }
+    
 }

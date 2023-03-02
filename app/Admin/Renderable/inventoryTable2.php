@@ -7,7 +7,7 @@ use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Grid\LazyRenderable;
 
-class inventoryTable extends LazyRenderable
+class inventoryTable2 extends LazyRenderable
 {
     public function grid():Grid
     {
@@ -19,10 +19,6 @@ class inventoryTable extends LazyRenderable
             $grid->column('id')->sortable();
             $grid->column('quantity','库存量');
             $grid->column('inventory_batches','库存批次');
-            
-            $grid->model()->where('material_information_id',"=",$this->payload['id'] ?? '');
-            
-          
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id')->width(4);
             });
@@ -41,7 +37,6 @@ class inventoryTable extends LazyRenderable
             $grid->disableCreateButton();
             $grid->disableFilterButton();
             $grid->disableRefreshButton();
-            $grid->disableRowSelector();
             
 
         });

@@ -1,11 +1,12 @@
 <?php 
+use Illuminate\Database\ClassMorphViolationException;
 return [
     'labels' => [
         'Subscription' => '资材申购',
         'subscription' => '资材申购',
     ],
     'fields' => [
-        'material_id' => '申购资材',
+        'material_information_id' => '申购资材',
         'requisition_orders' => '​申购单号',
         'applicant' => '申购用户',
         'request_time' => '建单时间',

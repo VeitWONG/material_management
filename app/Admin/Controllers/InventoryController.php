@@ -16,14 +16,19 @@ class InventoryController extends AdminController
      *
      * @return Grid
      */
+    
     protected function grid()
     {
         return Grid::make(new Inventory(), function (Grid $grid) {
+            $grid->setResource('inventory');
             
             $grid->model()->with(['inventoryexchange']);
-            //$grid->model()->with(['']);
+            $grid->model()->with(['materialinformation']);
             $grid->column('id')->sortable();
-            $grid->column('material_id');
+            
+            $grid->column('materialinformation.m_name','资材名称');
+            $grid->column('materialinformation.m_type','资材型号');
+
             $grid->column('quantity');
             $grid->column('inventory_batches');
             $grid->column('库存往来')->display('查看')->modal(function (Grid\Displayers\Modal $modal) {
@@ -46,6 +51,7 @@ class InventoryController extends AdminController
             $grid->addTableClass('table-text-center'); //列居中
         });
     }
+    
 
     /**
      * 创建详情表单.
@@ -75,9 +81,9 @@ class InventoryController extends AdminController
     {
         return Form::make(new Inventory(), function (Form $form) {
             $form->display('id');
-            $form->text('material_id');
+            $form->text('material_information_id');
             $form->text('quantity');
-            $form->text('inventory_batches')->value(date('Ymd').str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT));
+            $form->text('inventory_batches')->value('KC'.date('Ymd').str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT));
         
             $form->display('created_at');
             $form->display('updated_at');

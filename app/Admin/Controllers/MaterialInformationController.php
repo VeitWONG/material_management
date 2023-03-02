@@ -40,12 +40,9 @@ class MaterialInformationController extends AdminController
             $grid->supplierinformation('供应商名称')->pluck('s_name')->implode('');
 
             //关联库存
-            $grid->column('库存')->display('查看')->modal(function (Grid\Displayers\Modal $modal) {
+            $grid->column('库存')->display('查看')->expand(function () {
                 // 标题
-                $modal->title('库存列表');
-                // 自定义图标
-                $modal->icon('feather icon-edit');
-                // 传递当前行字段值
+                
                 return inventoryTable::make()->payload(['id' => $this->id]);
             });
 
