@@ -50,6 +50,7 @@ class InventoryExchangeController extends AdminController
             });
             
             $grid->addTableClass('table-text-center'); //列居中
+            $grid->enableDialogCreate();
         });
     }
 
@@ -89,8 +90,8 @@ class InventoryExchangeController extends AdminController
             ->title('库存批次')
             ->from(inventoryTable2::make())
             ->model(Inventory::class,'id','inventory_batches');
-            $form->number('quantity_received')->width(8);
-            $form->datetime('acceptance_at')->width(5);
+            $form->number('quantity_received')->width(6)->maxLength(7)->type('number');
+            $form->datetime('acceptance_at')->width(6);
             
             /*
             $form->submitted(function (Form $form){

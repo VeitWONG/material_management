@@ -3,11 +3,13 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Renderable\inventoryexchangeTable;
+use App\Admin\Renderable\materialTable2;
 use App\Admin\Repositories\Inventory;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
 use Dcat\Admin\Http\Controllers\AdminController;
+use App\Models\MaterialInformation;
 
 class InventoryController extends AdminController
 {
@@ -81,7 +83,11 @@ class InventoryController extends AdminController
     {
         return Form::make(new Inventory(), function (Form $form) {
             $form->display('id');
-            $form->text('material_information_id');
+            $form->selectTable('material_information_id','资材信息')
+            ->title('资材信息表')
+            ->from(materialTable2::make())
+            ->model(MaterialInformation::class,'id','m_type');
+            
             $form->text('quantity');
             $form->text('inventory_batches')->value('KC'.date('Ymd').str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT));
         

@@ -26,6 +26,7 @@ class SubscriptionController extends AdminController
         return Grid::make(new Subscription(), function (Grid $grid) {
             $grid->model()->with('materialinformation');
             $grid->column('id')->sortable();
+            $grid->column('materialinformation.m_byword','资材代号');
             $grid->column('materialinformation.m_name','资材名称');
             $grid->column('materialinformation.m_type','资材型号');
             $grid->column('requisition_orders');
@@ -35,9 +36,13 @@ class SubscriptionController extends AdminController
             $grid->column('m_byword');
             $grid->column('order_status')->display(function (){
                 if ($this->order_status == 1){
-                    return "待审核";
+                    return "待审";
                 }elseif($this->order_status == 2){
-                    return "已审核";
+                    return "通过";
+                }elseif($this->order_status == 3){
+                    return "驳回";
+                }elseif($this->order_status == 4){
+                    return "撤销";
                 }
             });
             $grid->column('created_at','申请时间')->sortable();
@@ -99,7 +104,7 @@ class SubscriptionController extends AdminController
             $form->text('applicant')->default(Admin::user()->username);
             $form->datetime('request_time');
             $form->number('quantity')->default(1);
-            $form->text('m_byword');
+            //$form->text('m_byword');
 
             $form->display('created_at');
             $form->display('updated_at');

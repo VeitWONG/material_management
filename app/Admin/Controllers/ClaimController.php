@@ -2,16 +2,22 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Actions\ActionTest1;
+use App\Admin\Actions\Show\ShowActionTest;
 use App\Admin\Renderable\inventoryExchangeTable;
 use App\Admin\Repositories\Claim;
 use Dcat\Admin\Admin;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
+use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Show;
 use Dcat\Admin\Http\Controllers\AdminController;
+use App\Models\InventoryExchange;
 
 class ClaimController extends AdminController
 {
+   
+
     /**
      * 创建表格
      *
@@ -20,6 +26,10 @@ class ClaimController extends AdminController
     protected function grid()
     {
         return Grid::make(new Claim(), function (Grid $grid) {
+            //表格添加自定义动作按钮
+            $grid->actions(function (Grid\Displayers\Actions $actions){
+                $actions->append(new ActionTest1());
+            });
             $grid->column('id')->sortable();
             $grid->column('inventory_exchanges_id');
             $grid->column('claim_orders');
@@ -28,6 +38,7 @@ class ClaimController extends AdminController
             $grid->column('request_at');
             $grid->column('created_at');
             $grid->column('updated_at')->sortable();
+            
         
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
@@ -55,6 +66,11 @@ class ClaimController extends AdminController
             $show->field('request_at');
             $show->field('created_at');
             $show->field('updated_at');
+            //在详情表单中添加自定义动作按钮
+            $show->tools(function (Show\Tools $tools) {
+                $tools->append(new ShowActionTest());
+            });
+            
         });
     }
 
