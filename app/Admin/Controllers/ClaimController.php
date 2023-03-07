@@ -27,9 +27,7 @@ class ClaimController extends AdminController
     {
         return Grid::make(new Claim(), function (Grid $grid) {
             //表格添加自定义动作按钮
-            $grid->actions(function (Grid\Displayers\Actions $actions){
-                $actions->append(new ActionTest1());
-            });
+            
             $grid->column('id')->sortable();
             $grid->column('inventory_exchanges_id');
             $grid->column('claim_orders');
@@ -68,7 +66,7 @@ class ClaimController extends AdminController
             $show->field('updated_at');
             //在详情表单中添加自定义动作按钮
             $show->tools(function (Show\Tools $tools) {
-                $tools->append(new ShowActionTest());
+                $tools->append(ShowActionTest::make()->addHtmlClass('btn-danger'));
             });
             
         });

@@ -63,9 +63,9 @@ class InventoryExchangeController extends AdminController
      */
     protected function detail($id)
     {
-        return Show::make($id, new InventoryExchange(), function (Show $show) {
+        return Show::make($id, new InventoryExchange(['inventory']), function (Show $show) {
             $show->field('id');
-            $show->field('inventory_id');
+            $show->field('inventory.inventory_batches','库存批次');
             $show->field('inbound_order');
             $show->field('quantity_received');
             $show->field('acceptance_at');

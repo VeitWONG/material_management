@@ -64,9 +64,9 @@ class InventoryController extends AdminController
      */
     protected function detail($id)
     {
-        return Show::make($id, new Inventory(), function (Show $show) {
+        return Show::make($id, new Inventory(['materialinformation']), function (Show $show) {
             $show->field('id');
-            $show->field('masterial.id','资材名称');
+            $show->field('materialinformation.m_type','资材名称');
             $show->field('quantity');
             $show->field('inventory_batches');
             $show->field('created_at');

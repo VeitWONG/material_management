@@ -122,7 +122,7 @@ class MaterialInformationController extends AdminController
      */
     protected function form()
     {
-        return Form::make(new MaterialInformation(['SupplierInformation']), function (Form $form) {
+        return Form::make(MaterialInformation::with(['SupplierInformation']), function (Form $form) {
             //表单提交确定提示
             $form->confirm("确认提交?");
 
@@ -142,14 +142,12 @@ class MaterialInformationController extends AdminController
             });
 
             $form->column(6, function (Form $form) {
+                $form->text('Supplier_Information.id','供应商id');
                 
                 $form->text('m_unit');
                 $form->decimal('m_price');
                 $form->textarea('m_description');
             });
         });
-
-        
-        
     }
 }

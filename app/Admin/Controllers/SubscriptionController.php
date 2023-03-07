@@ -65,9 +65,10 @@ class SubscriptionController extends AdminController
      */
     protected function detail($id)
     {
-        return Show::make($id, new Subscription(), function (Show $show) {
+        return Show::make($id, new Subscription(['materialinformation']), function (Show $show) {
+            
             $show->field('id');
-            $show->field('material_information_id');
+            $show->field('materialinformation.m_type','资材名称');
             $show->field('requisition_orders');
             $show->field('applicant');
             $show->field('request_time');
