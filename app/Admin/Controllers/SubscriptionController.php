@@ -13,6 +13,7 @@ use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
 use Dcat\Admin\Http\Controllers\AdminController;
+use Illuminate\Support\Facades\DB;
 
 class SubscriptionController extends AdminController
 {
@@ -33,7 +34,6 @@ class SubscriptionController extends AdminController
             $grid->column('applicant');
             $grid->column('request_time');
             $grid->column('quantity');
-            $grid->column('m_byword');
             $grid->column('order_status')->display(function (){
                 if ($this->order_status == 1){
                     return "待审";
@@ -44,7 +44,7 @@ class SubscriptionController extends AdminController
                 }elseif($this->order_status == 4){
                     return "撤销";
                 }
-            });
+            })->label();
             $grid->column('created_at','申请时间')->sortable();
         
             $grid->filter(function (Grid\Filter $filter) {
@@ -80,7 +80,7 @@ class SubscriptionController extends AdminController
                 }elseif($this->order_status == 2){
                     return "已审核";
                 }
-            });
+            })->label();
             $show->field('updated_at');
         });
     }
@@ -93,13 +93,19 @@ class SubscriptionController extends AdminController
     protected function form()
     {
         return Form::make(new Subscription(), function (Form $form) {
-            $form->confirm('您确定要提交表单吗？');
+            $form->confirm('您确定要提交表单吗?');
             $form->display('id');
             
             $form->selectTable('material_information_id','申购资材')
             ->title('资材信息表')
             ->from(materialTable2::make())
             ->model(MaterialInformation::class,'id','m_type');
+            $form->selectTable('inventory_exchanges_id','库存往来单号')
+            ->title('库存往来列表')
+            ->from(inventoryExchangeTable::make()->payload(['id' => '']))//inventory_exchange,id传递空值，以显示所有往来账单
+            ->model(InventoryExchange::class,'id','inbound_order');
+
+
             
             $form->text('requisition_orders')->value('SG'.$this->makeRand());
             $form->text('applicant')->default(Admin::user()->username);
@@ -109,7 +115,16 @@ class SubscriptionController extends AdminController
 
             $form->display('created_at');
             $form->display('updated_at');
-            
+
+            $form->saving(function (Form $form){
+                if ($form->isCreating()){
+                    $IE_id = $form->inventory_exchanges_id;
+                    $add_quantity = $form->quantity;
+                    //$result = $this->quantity_count_update($IE_id,$add_quantity);
+                    $result = $this->quantity_count_update($IE_id,$add_quantity);
+                    
+                }
+            });
         });
     }
 
@@ -120,5 +135,17 @@ class SubscriptionController extends AdminController
         return date('Ymd').$strand;
     }
 
-    
+    public function quantity_count_update($id,$quantity){
+        
+        $old_count = 0;
+        foreach(DB::select('select * from inventory_exchanges where id = ?',[$id]) as $ob_inventory_exchange){
+            $old_count = $ob_inventory_exchange->quantity_received;
+        }
+        
+        
+         DB::update('update `inventory_exchanges` set `quantity_received` = :test WHERE `id` = :id',
+        ['test' => ($quantity),'id' => $id]);//返回受影响的行数
+        
+    }
+   
 }

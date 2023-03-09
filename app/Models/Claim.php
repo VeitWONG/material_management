@@ -11,4 +11,7 @@ class Claim extends Model
 	use HasDateTimeFormatter;
     protected $table = 'claim';
     
+    public function IventoryExchange(){
+        return $this->belongsTo(InventoryExchange::class);
+    }
 }

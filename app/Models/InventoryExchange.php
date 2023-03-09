@@ -15,5 +15,14 @@ class InventoryExchange extends Model
     {
         return $this->belongsTo(Inventory::class);
     }
+
+    public function Subscription()
+    {
+        return $this->hasMany(Subscription::class);
+    }
     
+    public function Claim()
+    {
+        return $this->hasMany(Claim::class);
+    }
 }

@@ -14,6 +14,7 @@ use Dcat\Admin\Http\Controllers\AdminController;
 use Dcat\Admin\Widgets\Dropdown;
 use Dcat\Admin\Widgets\Metrics\Card;
 use Dcat\Admin\Widgets\Radio;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\Translation\Dumper\YamlFileDumper;
 
 class InventoryExchangeController extends AdminController
@@ -26,6 +27,8 @@ class InventoryExchangeController extends AdminController
     protected function grid()
     {
         return Grid::make(new InventoryExchange(), function (Grid $grid) {
+
+
             $grid->model()->with('inventory');
             $grid->column('id')->sortable();
             $grid->column('inventory.inventory_batches','库存批次');
@@ -90,7 +93,7 @@ class InventoryExchangeController extends AdminController
             ->title('库存批次')
             ->from(inventoryTable2::make())
             ->model(Inventory::class,'id','inventory_batches');
-            $form->number('quantity_received')->width(6)->maxLength(7)->type('number');
+            //$form->number('quantity_received')->default($this->quantity_count(6));
             $form->datetime('acceptance_at')->width(6);
             
             /*

@@ -14,5 +14,9 @@ class Subscription extends Model
     {
         return $this->belongsTo(MaterialInformation::class);
     }
+
+    public function IventoryExchange(){
+        return $this->belongsTo(InventoryExchange::class);
+    }
     
 }

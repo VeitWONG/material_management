@@ -66,7 +66,7 @@ class ClaimController extends AdminController
             $show->field('updated_at');
             //在详情表单中添加自定义动作按钮
             $show->tools(function (Show\Tools $tools) {
-                $tools->append(ShowActionTest::make()->addHtmlClass('btn-danger'));
+                $tools->append(ShowActionTest::make()->addHtmlClass('btn-danger mr-1'));
             });
             
         });
@@ -93,7 +93,7 @@ class ClaimController extends AdminController
             $form->datetime('request_at');
         
             $form->display('created_at');
-            $form->display('updated_at');
+            $form->datetime('updated_at');
         });
     }
 }

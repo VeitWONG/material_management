@@ -47,6 +47,7 @@ class SupplierInformationController extends AdminController
                 $filter->panel();
         
             });
+            $grid->enableDialogCreate();
         });
     }
 

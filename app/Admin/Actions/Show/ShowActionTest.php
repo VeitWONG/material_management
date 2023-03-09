@@ -2,9 +2,11 @@
 
 namespace App\Admin\Actions\Show;
 
+use App\Admin\Forms\Batchspform;
 use App\Admin\Repositories\Claim;
 use Dcat\Admin\Actions\Response;
 use Dcat\Admin\Form;
+use Dcat\Admin\Show;
 use Dcat\Admin\Show\AbstractTool;
 use Dcat\Admin\Traits\HasPermissions;
 use Dcat\Admin\Widgets\Modal;
@@ -18,8 +20,10 @@ class ShowActionTest extends AbstractTool
     /**
      * @return string
      */
-	protected $title = "<i class='fa fa-edit'></i>&nbsp;测试";
-    protected $modalId = 'show-current-user';
+	protected $title = "<i class='fa fa-edit'></i>&nbsp;测试"; //按钮标题
+    protected $modalId = 'show-current-user'; 
+
+    protected $method = 'POST';//与服务器交互的请求方法
 
     /**
      * 处理请求.
@@ -28,23 +32,11 @@ class ShowActionTest extends AbstractTool
      *
      * @return Response
      */
-    
-    public function handle(Request $request)
-    {
-        $id = $this->getKey();
-        $object = Claim::make();
-       try {
-        $object->getGridColumns()
-        {
-            
-        }
-        return $this->response()->success($id);
-       }
-       catch(\Exception){
-        return $this->response()->error('发生错误');
-       }
-      
+    public function handle(){
+        return $this->response()->success('TEST');
     }
+    
+    
     
 
  
@@ -62,12 +54,11 @@ class ShowActionTest extends AbstractTool
      * 确认弹窗
 	 * @return string|array|void
 	 */
-    /*
 	public function confirm()
 	{
 		return ['确定?'];
 	}
-    */
+    
 
     /**
      * @param Model|Authenticatable|HasPermissions|null $user
@@ -79,13 +70,8 @@ class ShowActionTest extends AbstractTool
         return true;
     }
 
-    /**
-     * @return array
-     */
-    protected function parameters()
-    {
-        return [];
-    }
+    
 
+    
 
 }
