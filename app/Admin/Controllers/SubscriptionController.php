@@ -118,10 +118,9 @@ class SubscriptionController extends AdminController
 
             $form->saving(function (Form $form){
                 if ($form->isCreating()){
-                    $IE_id = $form->inventory_exchanges_id;
-                    $add_quantity = $form->quantity;
-                    //$result = $this->quantity_count_update($IE_id,$add_quantity);
-                    $result = $this->quantity_count_update($IE_id,$add_quantity);
+                    $inventoryExchangeId = $form->inventory_exchanges_id;
+                    $addedQuantity = $form->quantity;
+                    $result = $this->quantity_count_update($inventoryExchangeId,$addedQuantity);
                     
                 }
             });
@@ -135,16 +134,16 @@ class SubscriptionController extends AdminController
         return date('Ymd').$strand;
     }
 
-    public function quantity_count_update($id,$quantity){
+    public function quantity_count_update($exchangeId,$newQuantity){
         
         $old_count = 0;
-        foreach(DB::select('select * from inventory_exchanges where id = ?',[$id]) as $ob_inventory_exchange){
+        foreach(DB::select('select * from inventory_exchanges where id = ?',[$exchangeId]) as $ob_inventory_exchange){
             $old_count = $ob_inventory_exchange->quantity_received;
         }
         
         
-         DB::update('update `inventory_exchanges` set `quantity_received` = :test WHERE `id` = :id',
-        ['test' => ($quantity),'id' => $id]);//返回受影响的行数
+        return DB::update("update 'inventory_exchanges' set 'quantity_received' = :test WHERE `id` = :id",
+        ['test' => ($newQuantity+$old_count), 'id' => $exchangeId]);//返回受影响的行数
         
     }
    
