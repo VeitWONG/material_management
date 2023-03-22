@@ -94,6 +94,8 @@ class ClaimController extends AdminController
         
             $form->display('created_at');
             $form->datetime('updated_at');
+            $form->file('test')->threads(5)->maxSize(20480);
+            $form->image('test');
         });
     }
 }

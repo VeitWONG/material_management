@@ -49,6 +49,8 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection payload
      * @property Grid\Column|Collection queue
      * @property Grid\Column|Collection uuid
+     * @property Grid\Column|Collection inventory_batches
+     * @property Grid\Column|Collection material_information_id
      * @property Grid\Column|Collection acceptance_at
      * @property Grid\Column|Collection inbound_order
      * @property Grid\Column|Collection inventory_id
@@ -68,7 +70,10 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection last_used_at
      * @property Grid\Column|Collection tokenable_id
      * @property Grid\Column|Collection tokenable_type
-     * @property Grid\Column|Collection material_information_id
+     * @property Grid\Column|Collection imge
+     * @property Grid\Column|Collection remark
+     * @property Grid\Column|Collection resolvent
+     * @property Grid\Column|Collection video
      * @property Grid\Column|Collection order_status
      * @property Grid\Column|Collection request_time
      * @property Grid\Column|Collection requisition_orders
@@ -117,6 +122,8 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection payload(string $label = null)
      * @method Grid\Column|Collection queue(string $label = null)
      * @method Grid\Column|Collection uuid(string $label = null)
+     * @method Grid\Column|Collection inventory_batches(string $label = null)
+     * @method Grid\Column|Collection material_information_id(string $label = null)
      * @method Grid\Column|Collection acceptance_at(string $label = null)
      * @method Grid\Column|Collection inbound_order(string $label = null)
      * @method Grid\Column|Collection inventory_id(string $label = null)
@@ -136,7 +143,10 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection last_used_at(string $label = null)
      * @method Grid\Column|Collection tokenable_id(string $label = null)
      * @method Grid\Column|Collection tokenable_type(string $label = null)
-     * @method Grid\Column|Collection material_information_id(string $label = null)
+     * @method Grid\Column|Collection imge(string $label = null)
+     * @method Grid\Column|Collection remark(string $label = null)
+     * @method Grid\Column|Collection resolvent(string $label = null)
+     * @method Grid\Column|Collection video(string $label = null)
      * @method Grid\Column|Collection order_status(string $label = null)
      * @method Grid\Column|Collection request_time(string $label = null)
      * @method Grid\Column|Collection requisition_orders(string $label = null)
@@ -190,6 +200,8 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection payload
      * @property Show\Field|Collection queue
      * @property Show\Field|Collection uuid
+     * @property Show\Field|Collection inventory_batches
+     * @property Show\Field|Collection material_information_id
      * @property Show\Field|Collection acceptance_at
      * @property Show\Field|Collection inbound_order
      * @property Show\Field|Collection inventory_id
@@ -209,7 +221,10 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection last_used_at
      * @property Show\Field|Collection tokenable_id
      * @property Show\Field|Collection tokenable_type
-     * @property Show\Field|Collection material_information_id
+     * @property Show\Field|Collection imge
+     * @property Show\Field|Collection remark
+     * @property Show\Field|Collection resolvent
+     * @property Show\Field|Collection video
      * @property Show\Field|Collection order_status
      * @property Show\Field|Collection request_time
      * @property Show\Field|Collection requisition_orders
@@ -258,6 +273,8 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection payload(string $label = null)
      * @method Show\Field|Collection queue(string $label = null)
      * @method Show\Field|Collection uuid(string $label = null)
+     * @method Show\Field|Collection inventory_batches(string $label = null)
+     * @method Show\Field|Collection material_information_id(string $label = null)
      * @method Show\Field|Collection acceptance_at(string $label = null)
      * @method Show\Field|Collection inbound_order(string $label = null)
      * @method Show\Field|Collection inventory_id(string $label = null)
@@ -277,7 +294,10 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection last_used_at(string $label = null)
      * @method Show\Field|Collection tokenable_id(string $label = null)
      * @method Show\Field|Collection tokenable_type(string $label = null)
-     * @method Show\Field|Collection material_information_id(string $label = null)
+     * @method Show\Field|Collection imge(string $label = null)
+     * @method Show\Field|Collection remark(string $label = null)
+     * @method Show\Field|Collection resolvent(string $label = null)
+     * @method Show\Field|Collection video(string $label = null)
      * @method Show\Field|Collection order_status(string $label = null)
      * @method Show\Field|Collection request_time(string $label = null)
      * @method Show\Field|Collection requisition_orders(string $label = null)

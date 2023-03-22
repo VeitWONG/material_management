@@ -262,7 +262,7 @@ return [
     'upload' => [
 
         // Disk in `config/filesystem.php`.
-        'disk' => 'public',
+        'disk' => 'admin',
 
         // Image and file upload path under the disk above.
         'directory' => [
@@ -364,5 +364,8 @@ return [
         // When you use command `php artisan admin:ext-make` to generate extensions,
         // the extension files will be generated in this directory.
         'dir' => base_path('dcat-admin-extensions'),
+        'media-player'=>[
+            'use_path' => true,
+        ]
     ],
 ];
