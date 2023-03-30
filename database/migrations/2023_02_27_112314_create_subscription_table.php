@@ -15,11 +15,12 @@ class CreateSubscriptionTable extends Migration
     {
         Schema::create('subscription', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('inventory_exchanges_id')->default('');
+            $table->integer('material_information_id')->default('');
+            $table->integer('inventory_exchanges_id')->default('');
             $table->string('requisition_orders')->default('');
             $table->string('applicant')->default('');
             $table->string('request_time')->default('');
-            $table->string('quantity')->default('');
+            $table->integer('quantity')->default('');
             $table->string('m_byword')->default('');
             $table->integer('order_status');
             $table->timestamps();

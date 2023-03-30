@@ -20,38 +20,56 @@ class HomeController extends Controller
         return $content
             ->header('主页')
             ->description('快速入口')
-            ->body(function (Row $row) {
-                $row->column(4, function (Column $column) {
-                    $column->row(
-                        $this->CardMake('资材信息','Designer _Isometric.svg','admin/material')
-                    );
-                    $column->row(
-                        $this->CardMake('供应商信息','用于管理资材信息','admin/supplier')
-                    );
-                });
+            ->body($this->cardMake()
+            //     function (Row $row) {
+            //     $rowWidth = 6;
+            //     $row->column($rowWidth, function (Column $column) {
+            //         $column->row(
+            //             $this->
+            //             cardMake(
+            //                 '网络',
+            //                 'images/Designer_Isometric.svg',
+            //                 url()->current().'/question?type=1',
+            //                 '用于解决网络问题'
+            //             )
+            //         );
+            //         $column->row(
+            //             $this->
+            //             cardMake(
+            //                 '软件',
+            //                 'images/Designer_Isometric.svg',
+            //                 url()->current().'/question?type=2',
+            //                 '用于解决软件问题'
+            //             )
+            //         );
+            //     });
 
-                $row->column(4, function (Column $column) {
-                    $column->row(
-                        $this->CardMake('库存管理','','admin/inventory')
-                    );
-                    $column->row(
-                        $this->CardMake('库存往来','用于管理资材信息','admin/inventoryexchange')
-                    );
-                });
-
-                $row->column(4, function (Column $column) {
-                    $column->row(
-                        $this->CardMake('资材申购','','admin/subscription')
-                    );
-                    $column->row(
-                        $this->CardMake('资材申领','用于管理资材信息','admin/claim')
-                    );
-                });
-            });
+            //     $row->column($rowWidth, function (Column $column) {
+            //         $column->row(
+            //             $this->
+            //             cardMake(
+            //                 '硬件',
+            //                 'images/Designer_Isometric.svg',
+            //                 url()->current().'/question?type=3',
+            //                 '用于解决硬件问题'
+            //             )
+            //         );
+            //         $column->row(
+            //             $this->
+            //             cardMake(
+            //                 '其他',
+            //                 'images/Designer_Isometric.svg',
+            //                 url()->current().'/question?type=4',
+            //                 '用于解决其他问题'
+            //             )
+            //         );
+            //     });
+            // }
+        );
     }
 
-    public function CardMake($title,$svg,$route){
-        return view('card',['title'=>$title,'svg'=>$svg,'route'=>$route]);
+    public function cardMake(){
+        return view('home');
     }
 }
 

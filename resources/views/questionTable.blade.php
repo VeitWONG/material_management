@@ -40,7 +40,7 @@
     .spanStyle{  
       white-space: nowrap;  /*强制span不换行*/
       display: inline-block;  /*将span当做块级元素对待*/
-      width: 40%;  /*限制宽度*/
+      width: 70%;  /*限制宽度*/
       height: 100%;
       overflow: hidden;  /*超出宽度部分隐藏*/
       text-overflow: ellipsis;  /*超出部分以点号代替*/
@@ -66,16 +66,16 @@
 
     {!! $grid->renderHeader() !!}
 
-        <div class="row">
+        <div class="row" style="padding-left: 0.6rem;padding-right: 0.6rem">
             @foreach($grid->rows() as $row)
-                <div class="col-6 col-sm-6 col-md-3 col-lg-2" style="padding: 1.2%;margin-top: 1px">
+                <div class="col-6 col-sm-6 col-md-3 col-lg-2" style="padding:1.4%">
                     <a href={!! url()->current()."/".$row->column('id') !!} >
                         <div class="mailbox-attachment-info rounded" >
                             <span class="mailbox-attachment-icon has-img" >
                                 <h1 style="display: none">
                                     {!! $model = new \App\Models\Question !!}
                                 </h1>
-                                <img style="width:100%;height:100% ;object-fit:cover" class="spanStyle2" src={{$model->getImage().str_replace(' ','%20',explode(',',$row->column('imge')))[0]}}  alt="..." >
+                                <img style="width:100%;height:100% ;object-fit:cover;font-size:10%" class="spanStyle2" src={{$model->getImage().str_replace(' ','%20',explode(',',$row->column('imge')))[0]}}  alt="未上传" >
                             </span>
                             <div class="d-flex item">
                                 <span class="mailbox-attachment-name">

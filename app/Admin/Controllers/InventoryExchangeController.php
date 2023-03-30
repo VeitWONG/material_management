@@ -88,7 +88,7 @@ class InventoryExchangeController extends AdminController
             $form->display('id');
             $form->radio('type')->options([1=>'出库',2 =>'入库']);
             $form->text('inbound_order')->value('WL'.$this->makeRand());
-            
+            $form->number('quantity_received');
             $form->selectTable('inventory_id','库存批次')
             ->title('库存批次')
             ->from(inventoryTable2::make())

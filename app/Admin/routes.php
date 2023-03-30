@@ -11,9 +11,10 @@ Route::group([
     'namespace'  => config('admin.route.namespace'),
     'middleware' => config('admin.route.middleware'),
 ], function (Router $router) {
-    $router->get('/', function(){
-        return redirect('admin/question');
-    });
+    // $router->get('/', function(){
+    //     return redirect('admin/question');
+    // });
+    $router->get('/','HomeController@index');
     $router->resource('material','MaterialInformationController');
     $router->resource('supplier','SupplierInformationController');
     $router->resource('inventory','InventoryController');

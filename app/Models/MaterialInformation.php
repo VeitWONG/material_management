@@ -24,6 +24,11 @@ class MaterialInformation extends Model
         return $this->hasMany(Subscription::class);
     }
 
+    public function Claim()
+    {
+        return $this->hasMany(Claim::class);
+    }
+
     public function Inventory()
     {
         return $this->hasMany(Inventory::class);

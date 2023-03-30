@@ -10,6 +10,7 @@ return [
         'applicant' => '申领用户',
         'quantity' => '申领数量',
         'request_at' => '申领时间',
+        'order_status' => '申领单状态',
     ],
     'options' => [
     ],

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e23cd0f8ad7d26e97c788c1ce22906f3",
+    "content-hash": "8c01ff9e52564cb83c11938fe48059a5",
     "packages": [
         {
             "name": "abovesky/dcat-media-player",
@@ -3771,6 +3771,66 @@
                 }
             ],
             "time": "2022-12-31T22:20:34+00:00"
+        },
+        {
+            "name": "sparkinzy/dcat-viewer",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sparkinzy/dcat-viewer.git",
+                "reference": "9130d0cf8f52114641b897202d33d5f763b3a2dd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Sparkinzy/dcat-viewer/zipball/9130d0cf8f52114641b897202d33d5f763b3a2dd",
+                "reference": "9130d0cf8f52114641b897202d33d5f763b3a2dd",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "dcat/laravel-admin": "~2.0",
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "dcat-admin": "Sparkinzy\\DcatViewer\\DcatViewerServiceProvider",
+                "laravel": {
+                    "providers": [
+                        "Sparkinzy\\DcatViewer\\DcatViewerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sparkinzy\\DcatViewer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "sparkinzy",
+                    "email": "sparkinzy@163.com"
+                }
+            ],
+            "description": "dcat admin 图片预览增强插件...",
+            "homepage": "https://github.com/sparkinzy/dcat-viewer",
+            "keywords": [
+                "dcat-admin",
+                "extension"
+            ],
+            "support": {
+                "issues": "https://github.com/Sparkinzy/dcat-viewer/issues",
+                "source": "https://github.com/Sparkinzy/dcat-viewer/tree/1.0.3"
+            },
+            "time": "2022-09-16T08:38:54+00:00"
         },
         {
             "name": "spatie/eloquent-sortable",

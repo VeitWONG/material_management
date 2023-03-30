@@ -32,7 +32,7 @@ class SubscriptionController extends AdminController
             $grid->column('materialinformation.m_type','资材型号');
             $grid->column('requisition_orders');
             $grid->column('applicant');
-            $grid->column('request_time');
+            $grid->column('request_time','申购时间');
             $grid->column('quantity');
             $grid->column('order_status')->display(function (){
                 if ($this->order_status == 1){
@@ -44,15 +44,27 @@ class SubscriptionController extends AdminController
                 }elseif($this->order_status == 4){
                     return "撤销";
                 }
-            })->label();
-            $grid->column('created_at','申请时间')->sortable();
+            })->label([
+                1 => 'primary',
+                2 => 'success',
+                3 => '#FF0000',
+                4 => 'black'
+            ])->sortable();
         
             $grid->filter(function (Grid\Filter $filter) {
-                $filter->equal('id');
+                $filter->equal('id')->width(6);
+                $filter->equal('materialinformation.m_byword','资材代号')->width(6);
+                $filter->like('materialinformation.m_name','资材名称')->width(6);
+                $filter->equal('order_status')->radio([1 =>'待审',2 => '通过',3 => '驳回',4 =>'撤销'])->width(12);
+                $filter->panel();
+                $filter->expand(false);
         
             });
             $grid->enableDialogCreate();
             $grid->addTableClass('table-text-center'); //列居中
+            $grid->disableEditButton();
+            $grid->disableDeleteButton();
+            $grid->setActionClass(Grid\Displayers\Actions::class);
         });
     }
 
@@ -68,20 +80,23 @@ class SubscriptionController extends AdminController
         return Show::make($id, new Subscription(['materialinformation']), function (Show $show) {
             
             $show->field('id');
+            $show->field('materialinformation.m_byword','资材代号');
             $show->field('materialinformation.m_type','资材名称');
             $show->field('requisition_orders');
             $show->field('applicant');
-            $show->field('request_time');
             $show->field('quantity');
-            $show->field('m_byword');
             $show->field('order_status')->as(function (){
                 if ($this->order_status == 1){
                     return "待审核";
                 }elseif($this->order_status == 2){
-                    return "已审核";
+                    return "已通过";
+                }elseif($this->order_status == 3){
+                    return "驳回";
+                }elseif($this->order_status == 4){
+                    return "撤销";
                 }
-            })->label();
-            $show->field('updated_at');
+            });
+            $show->field('request_time','申购时间');
         });
     }
 
@@ -100,10 +115,10 @@ class SubscriptionController extends AdminController
             ->title('资材信息表')
             ->from(materialTable2::make())
             ->model(MaterialInformation::class,'id','m_type');
-            $form->selectTable('inventory_exchanges_id','库存往来单号')
-            ->title('库存往来列表')
-            ->from(inventoryExchangeTable::make()->payload(['id' => '']))//inventory_exchange,id传递空值，以显示所有往来账单
-            ->model(InventoryExchange::class,'id','inbound_order');
+            // $form->selectTable('inventory_exchanges_id','库存往来单号')
+            // ->title('库存往来列表')
+            // ->from(inventoryExchangeTable::make()->payload(['id' => '']))//inventory_exchange,id传递空值，以显示所有往来账单
+            // ->model(InventoryExchange::class,'id','inbound_order');
 
 
             
@@ -113,8 +128,6 @@ class SubscriptionController extends AdminController
             $form->number('quantity')->default(1);
             //$form->text('m_byword');
 
-            $form->display('created_at');
-            $form->display('updated_at');
 
             $form->saving(function (Form $form){
                 if ($form->isCreating()){

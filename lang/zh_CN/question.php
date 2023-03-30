@@ -5,6 +5,7 @@ return [
         'question' => '运维问题',
     ],
     'fields' => [
+        'type' => '类别',
         'title' => '标题',
         'detail' => '详情',
         'resolvent' => '解决方法',

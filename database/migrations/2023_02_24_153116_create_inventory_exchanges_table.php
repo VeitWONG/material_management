@@ -16,6 +16,7 @@ class CreateInventoryExchangesTable extends Migration
         Schema::create('inventory_exchanges', function (Blueprint $table) {
             $table->increments('id');
             $table->string('inventory_id')->default('');
+            $table->integer('type');
             $table->string('inbound_order')->default('');
             $table->integer('quantity_received');
             $table->string('acceptance_at')->default('');

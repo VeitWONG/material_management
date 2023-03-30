@@ -11,7 +11,7 @@ return [
     | login page.
     |
     */
-    'name' => 'Material Management System - Login',
+    'name' => 'Ops System - Login',
 
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ return [
     | `img` tag, eg '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo' => '<img src="/vendor/dcat-admin/images/logo.png" width="35"> &nbsp;Material Management System',
+    'logo' => '<img src="/vendor/dcat-admin/images/logo.png" width="35"> &nbsp;Ops System',
 
     /*
     |--------------------------------------------------------------------------
@@ -96,7 +96,7 @@ return [
     | Html title for all pages.
     |
     */
-    'title' => 'Material Management System',
+    'title' => 'Ops System',
 
     /*
     |--------------------------------------------------------------------------

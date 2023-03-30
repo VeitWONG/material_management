@@ -15,10 +15,12 @@ class CreateClaimTable extends Migration
     {
         Schema::create('claim', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('material_information_id')->default('');
             $table->string('inventory_exchanges_id')->default('');
             $table->string('claim_orders')->default('');
             $table->string('applicant')->default('');
             $table->integer('quantity');
+            $table->integer('order_status');
             $table->timestamp('request_at');
             $table->timestamps();
         });
