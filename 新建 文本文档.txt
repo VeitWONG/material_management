@@ -1,1 +1,3 @@
 {!! str_replace(' ','%20',explode(',',$row->column('imge')))[0] !!}
+http://addressbook2.toto.co.jp/
+http://cn.onenotegem.com/a/others/onenote-download.html

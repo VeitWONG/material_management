@@ -14,6 +14,7 @@ use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
 use Dcat\Admin\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\DB;
+use App\Admin\Actions\Grid\Batchsp;
 
 class SubscriptionController extends AdminController
 {
@@ -25,6 +26,7 @@ class SubscriptionController extends AdminController
     protected function grid()
     {
         return Grid::make(new Subscription(), function (Grid $grid) {
+            $grid->batchActions([new Batchsp()]);
             $grid->model()->with('materialinformation');
             $grid->column('id')->sortable();
             $grid->column('materialinformation.m_byword','资材代号');
@@ -80,6 +82,7 @@ class SubscriptionController extends AdminController
         return Show::make($id, new Subscription(['materialinformation']), function (Show $show) {
             
             $show->field('id');
+            $show->field('FlowNo');
             $show->field('materialinformation.m_byword','资材代号');
             $show->field('materialinformation.m_type','资材名称');
             $show->field('requisition_orders');
@@ -110,7 +113,7 @@ class SubscriptionController extends AdminController
         return Form::make(new Subscription(), function (Form $form) {
             $form->confirm('您确定要提交表单吗?');
             $form->display('id');
-            
+            $form->text('FlowNo');
             $form->selectTable('material_information_id','申购资材')
             ->title('资材信息表')
             ->from(materialTable2::make())

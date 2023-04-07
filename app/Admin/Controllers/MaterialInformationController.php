@@ -103,7 +103,7 @@ class MaterialInformationController extends AdminController
                 $grid->column('s_contact','联系人')->width('25%');
                 $grid->column('s_phone','电话')->width('25%');
                 $grid->addTableClass('table-text-center'); //显示居中
-                
+
                 $grid->disableActions(); //关闭动作按钮
                 $grid->disableCreateButton(); //关闭创建按钮
                 $grid->disableRefreshButton(); //关闭刷新按钮
@@ -152,3 +152,4 @@ class MaterialInformationController extends AdminController
         });
     }
 }
+

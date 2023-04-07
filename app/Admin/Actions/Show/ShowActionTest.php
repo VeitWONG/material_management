@@ -20,7 +20,7 @@ class ShowActionTest extends AbstractTool
     /**
      * @return string
      */
-	protected $title = "<i class='fa fa-edit'></i>&nbsp;测试"; //按钮标题
+	protected $title = "<i class='fa fa-edit'></i>&nbsp;审批"; //按钮标题
     protected $modalId = 'show-current-user'; 
 
     protected $method = 'POST';//与服务器交互的请求方法
@@ -32,15 +32,11 @@ class ShowActionTest extends AbstractTool
      *
      * @return Response
      */
-    public function handle(){
-        return $this->response()->success('TEST');
+    public function handle(Request $request){
+        $key = $this->getKey();
+        return $this->response()->success($key);
     }
     
-    
-    
-
- 
-
     /**
      * 跳转使用
      * @return string|void
@@ -69,6 +65,8 @@ class ShowActionTest extends AbstractTool
     {
         return true;
     }
+
+
 
     
 

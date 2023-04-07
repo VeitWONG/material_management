@@ -18,5 +18,11 @@ class Subscription extends Model
     public function IventoryExchange(){
         return $this->belongsTo(InventoryExchange::class);
     }
+
+    public function AuditFlow(){
+        return $this->belongsTo(AuditFlow::class);
+    }
+
+    
     
 }

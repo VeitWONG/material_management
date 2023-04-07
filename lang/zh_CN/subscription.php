@@ -8,6 +8,7 @@ return [
     'fields' => [
         'material_information_id' => '申购资材',
         'requisition_orders' => '​申购单号',
+        'FlowNo' => '审批编号',
         'applicant' => '申购用户',
         'request_time' => '建单时间',
         'quantity' => '申购数量',

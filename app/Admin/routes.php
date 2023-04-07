@@ -22,4 +22,5 @@ Route::group([
     $router->resource('subscription','SubscriptionController');
     $router->resource('claim','ClaimController');
     $router->resource('question','QuestionController');
+    $router->resource('approval','AuditFlowController');
 });

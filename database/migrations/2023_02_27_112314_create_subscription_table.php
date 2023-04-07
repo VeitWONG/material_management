@@ -15,6 +15,7 @@ class CreateSubscriptionTable extends Migration
     {
         Schema::create('subscription', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('FlowNo');
             $table->integer('material_information_id')->default('');
             $table->integer('inventory_exchanges_id')->default('');
             $table->string('requisition_orders')->default('');
