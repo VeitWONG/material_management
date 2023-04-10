@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Actions\ActionTest1;
+use App\Admin\Actions\Grid\Batchsp;
 use App\Admin\Actions\Show\ShowActionTest;
 use App\Admin\Renderable\inventoryExchangeTable;
 use App\Admin\Renderable\materialTable2;
@@ -29,6 +30,7 @@ class ClaimController extends AdminController
     {
         return Grid::make(new Claim(), function (Grid $grid) {
             //表格添加自定义动作按钮
+            $grid->batchActions([new Batchsp()]);
             $grid->model()->with('materialinformation');
             $grid->column('id')->sortable();
             $grid->column('materialinformation.m_byword','资材代号');
@@ -90,22 +92,25 @@ class ClaimController extends AdminController
             $show->field('claim_orders');
             $show->field('applicant');
             $show->field('quantity');
-            $show->field('order_status')->as(function (){
-                if ($this->order_status == 1){
-                    return "待审核";
-                }elseif($this->order_status == 2){
-                    return "已通过";
-                }elseif($this->order_status == 3){
-                    return "驳回";
-                }elseif($this->order_status == 4){
-                    return "撤销";
-                }
-            });
+            $show->order_status()->using([
+                1=>"待审核",
+                2=>"已通过",
+                3=>"驳回",
+                4=>"撤销"
+            ])->dot(
+                [
+                    1 => 'primary',
+                    2 => 'success',
+                    3 => '#FF0000',
+                    4 => 'black'
+                ]
+            );
             $show->field('request_at');
             //在详情表单中添加自定义动作按钮
             $show->tools(function (Show\Tools $tools) {
-                $tools->append(ShowActionTest::make()->addHtmlClass('btn-danger mr-1'));
+                $tools->append(ShowActionTest::make());
             });
+            
             
             
         });

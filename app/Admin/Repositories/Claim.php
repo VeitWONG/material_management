@@ -23,10 +23,6 @@ class Claim extends EloquentRepository
     public function update(\Dcat\Admin\Form $form)
     {
         $attributes = $form->updates();
-        
-        
-
-
         return 'test';
     }
 }
