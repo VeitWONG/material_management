@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Admin\Actions\Modal\memberModal;
 use App\Admin\Renderable\inventoryTable;
+use App\Admin\Renderable\supplierTable;
 use App\Admin\Repositories\MaterialInformation;
 use App\Admin\Repositories\SupplierInformation;
 use Dcat\Admin\Form;
@@ -148,7 +149,10 @@ class MaterialInformationController extends AdminController
             });
 
             $form->column(6, function (Form $form) {
-                $form->text('Supplier_Information.id','供应商id');
+                $form->selectTable('Supplier_Information.id','供应商')
+                ->title("供应商列表")
+                ->from(supplierTable::make())
+                ->model(SupplierInformation::class,'id');
                 
                 $form->text('m_unit');
                 $form->decimal('m_price');
