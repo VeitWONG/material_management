@@ -44,4 +44,5 @@ class Question extends Model
 
         return Storage::disk('admin')->url($this->image);
     }
+    protected $fillable = ['type','title','detail','resolvent','imge','video','remark'];
 }

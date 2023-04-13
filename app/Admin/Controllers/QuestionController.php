@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Actions\Grid\Reast;
+use App\Admin\Actions\Modal\memberModal;
 use App\Admin\Repositories\Question;
 use App\Models\Question as Q;
 use Dcat\Admin\Admin;
@@ -34,9 +35,11 @@ class QuestionController extends AdminController
             $grid->disableRefreshButton();
             $grid->addTableClass(['table-text-center']);
             */
+            
             $grid->export()->filename('导出测试');
             $grid->export()->xlsx();
             $grid->export();
+            
             $grid->rowSelector()->click();
             $grid->disableRefreshButton();
             $grid->setResource('question');
@@ -53,18 +56,10 @@ class QuestionController extends AdminController
                 $filter->expand(false);
             });
             
-            $grid->quickSearch('id','title')->placeholder('搜索...')->auto(false);
-            // $grid->selector(function (Grid\Tools\Selector $selector) {
-            //     $selector->selectOne('type', '问题类型', [
-            //         1234 => '硬件问题',
-            //         2 => '软件问题',
-            //         3 => '测试条目',
-            //         4 => '测试条目',
-            //     ]);
-            // });
+           
 
             $grid->tools(function (Grid\Tools $tools){
-                $tools->append(new Reast());
+                $tools->append(new memberModal());
             });
         });
     }

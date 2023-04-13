@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Actions\Modal\memberModal;
 use App\Admin\Renderable\inventoryTable;
 use App\Admin\Repositories\MaterialInformation;
 use App\Admin\Repositories\SupplierInformation;
@@ -24,6 +25,10 @@ class MaterialInformationController extends AdminController
     protected function grid()
     {
         return Grid::make(new MaterialInformation(['supplierinformation']), function (Grid $grid) {
+            $grid->tools(function (Grid\Tools $tools){
+                $tools->append(new memberModal());
+            });
+            
             $grid->column('id')->sortable();
             $grid->column('m_byword');
             $grid->column('m_categories');

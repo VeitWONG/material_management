@@ -113,7 +113,7 @@ class SubscriptionController extends AdminController
         return Form::make(new Subscription(), function (Form $form) {
             $form->confirm('您确定要提交表单吗?');
             $form->display('id');
-            $form->text('FlowNo');
+            $form->text('FlowNo')->value('SP'.$this->makeRand());
             $form->selectTable('material_information_id','申购资材')
             ->title('资材信息表')
             ->from(materialTable2::make())

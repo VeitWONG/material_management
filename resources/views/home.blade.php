@@ -1,45 +1,61 @@
 <div class="row">
     <div class="col-6 col-sm-6 col-md-3 col-lg-2">
-        <a href={{url()->current().'/question?type=1'}}>
+        <a href={{url()->current().'/material'}}>
             <div class="card rounded">
-                <img style="padding:1rem" src='images/iconmonstr-internet-explorer-1.svg' class="card-img-top" alt="...">
-                <div class="card-body" style="background-color:">
-                    <h5 class="card-title">网络</h5>
-                    <p class="card-text">用于解决网络问题</p>
+                <img style="padding:1rem" src='images/管理箱_dropbox.svg' class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                    <h5 class="card-text">资材管理</h5>
                 </div>
             </div>
         </a>
     </div>
     <div class="col-6 col-sm-6 col-md-3 col-lg-2">
-        <a href={{url()->current().'/question?type=2'}}>
+        <a href={{url()->current().'/supplier'}}>
             <div class="card rounded">
-                <img style="padding:" src='images/iconmonstr-window-x-filled.svg' class="card-img-top" alt="...">
-                <div class="card-body" style="background-color:">
-                    <h5 class="card-title">软件</h5>
-                    <p class="card-text">用于解决软件问题</p>
+                <img style="padding:1rem" src='images/众多用户_every-user.svg' class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                    <h5 class="card-text">供应商管理</h5>
                 </div>
             </div>
         </a>
     </div>
     
     <div class="col-6 col-sm-6 col-md-3 col-lg-2">
-        <a href={{url()->current().'/question?type=3'}}>
+        <a href={{url()->current().'/inventory'}}>
             <div class="card rounded">
-                <img style="padding:1rem" src='images/iconmonstr-cpu-6.svg' class="card-img-top" alt="...">
-                <div class="card-body" style="background-color:">
-                    <h5 class="card-title">硬件</h5>
-                    <p class="card-text">用于解决硬件问题</p>
+                <img style="padding:1rem" src='images/数据库_data.svg' class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                    <h5 class="card-text">库存管理</h5>
                 </div>
             </div>
         </a>
     </div>
     <div class="col-6 col-sm-6 col-md-3 col-lg-2">
-        <a href={{url()->current().'/question?type=4'}}>
+        <a href={{url()->current().'/inventoryexchange'}}>
             <div class="card rounded">
-                <img src='images/iconmonstr-gallery-vertical-filled.svg' class="card-img-top" alt="...">
-                <div class="card-body" style="background-color:">
-                    <h5 class="card-title">其他</h5>
-                    <p class="card-text">用于解决其他问题</p>
+                <img style="padding:1rem" src='images/关联_association.svg' class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                    <h5 class="card-text">库存往来</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-6 col-sm-6 col-md-3 col-lg-2">
+        <a href={{url()->current().'/subscription'}}>
+            <div class="card rounded">
+                <img style="padding:1rem" src='images/入库_warehousing.svg' class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                    <h5 class="card-text" style="">资材申购</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-6 col-sm-6 col-md-3 col-lg-2">
+        <a href={{url()->current().'/claim'}}>
+            <div class="card rounded">
+                <img style="padding:1rem" src='images/出库_outbound.svg' class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                    <h5 class="card-text">资材申领</h5>
                 </div>
             </div>
         </a>
