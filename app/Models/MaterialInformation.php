@@ -11,7 +11,7 @@ class MaterialInformation extends Model
 {
 	use HasDateTimeFormatter;
     protected $table = 'material_information';
-    public function SupplierInformation(): BelongsToMany
+    public function supplierInformation(): BelongsToMany
     {
         $pivotTable = 'supplier_material'; // 中间表
 

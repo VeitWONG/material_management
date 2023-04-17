@@ -27,10 +27,8 @@ class InventoryController extends AdminController
             $grid->model()->with(['inventoryexchange']);
             $grid->model()->with(['materialinformation']);
             $grid->column('id')->sortable();
-            
             $grid->column('materialinformation.m_name','资材名称');
             $grid->column('materialinformation.m_type','资材型号');
-
             $grid->column('quantity');
             $grid->column('inventory_batches');
             $grid->column('库存往来')->display('查看')->modal(function (Grid\Displayers\Modal $modal) {
@@ -87,10 +85,8 @@ class InventoryController extends AdminController
             ->title('资材信息表')
             ->from(materialTable2::make())
             ->model(MaterialInformation::class,'id','m_type');
-            
             $form->text('quantity');
             $form->text('inventory_batches')->value('KC'.date('Ymd').str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT));
-        
             $form->display('created_at');
             $form->display('updated_at');
         });

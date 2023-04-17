@@ -7,6 +7,7 @@ use App\Admin\Renderable\inventoryTable;
 use App\Admin\Renderable\supplierTable;
 use App\Admin\Repositories\MaterialInformation;
 use App\Admin\Repositories\SupplierInformation;
+use DB;
 use Dcat\Admin\Form;
 use Dcat\Admin\Form\Field\Display;
 use Dcat\Admin\Grid;
@@ -39,8 +40,6 @@ class MaterialInformationController extends AdminController
             $grid->column('m_unit');
             $grid->column('m_description');
             $grid->column('m_price');
-            //$grid->column('created_at');
-            //$grid->column('updated_at')->sortable();
             
             //关联供应商数据
             $grid->supplierinformation('供应商名称')->pluck('s_name')->implode('');
@@ -64,7 +63,6 @@ class MaterialInformationController extends AdminController
                 $filter->equal('m_brand')->width(4);
                 $filter->equal('m_type')->width(4);
                 $filter->panel();
-            
             });
 
             //数据表格设置
@@ -129,35 +127,48 @@ class MaterialInformationController extends AdminController
      */
     protected function form()
     {
-        return Form::make(MaterialInformation::with(['SupplierInformation']), function (Form $form) {
+        return Form::make(MaterialInformation::with(['supplierInformation']), function (Form $form) {
             //表单提交确定提示
             $form->confirm("确认提交?");
-
             //设定表单提交的动作路由，先判断是否是新建动作，如果是则指定处理路由
             if ($form->isCreating()){
-                $form->action('material');
+                $form->action('material'); 
+                $form->column(6, function (Form $form) {
+                    $form->text('m_byword');
+                    $form->text('m_categories');
+                    $form->text('m_name');
+                    $form->text('m_brand');
+                    $form->text('m_type');
+                });
+                
+                $form->column(6, function (Form $form) {
+                     $form->selectTable('Supplier_Information.id','供应商')
+                     ->title("供应商列表")
+                     ->from(supplierTable::make())
+                     ->model(SupplierInformation::class,'id');
+                    $form->text('m_unit');
+                    $form->decimal('m_price');
+                    $form->textarea('m_description');
+                });
+            }else{
+                
+                $form->column(6, function (Form $form) {
+                    $form->text('m_byword');
+                    $form->text('m_categories');
+                    $form->text('m_name');
+                    $form->text('m_brand');
+                    $form->text('m_type');
+                });
+                
+                $form->column(6, function (Form $form) {
+                    $form->text('Supplier_Information.id','供应商')->value(($form->model()->supplierInformation()->pluck('id'))[0]);
+                   
+                    $form->text('m_unit');
+                    $form->decimal('m_price');
+                    $form->textarea('m_description');
+                });
             }
-
-            //构建表单
-            $form->column(6, function (Form $form) {
-                $form->text('m_byword');
-                $form->text('m_categories');
-                $form->text('m_name');
-                $form->text('m_brand');
-                $form->text('m_type');
-                
-            });
-
-            $form->column(6, function (Form $form) {
-                $form->selectTable('Supplier_Information.id','供应商')
-                ->title("供应商列表")
-                ->from(supplierTable::make())
-                ->model(SupplierInformation::class,'id');
-                
-                $form->text('m_unit');
-                $form->decimal('m_price');
-                $form->textarea('m_description');
-            });
+            
         });
     }
 }

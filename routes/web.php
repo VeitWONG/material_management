@@ -17,8 +17,9 @@ Route::get('/', function () {
     return redirect('admin');
 });
 
-Route::get('js',function(){
-    return view('jstest');
+Route::get("/test",function (){
+    return view('test');
 });
+
 
 
