@@ -15,6 +15,7 @@
         "laravel/tinker": "^2.7",
         "maatwebsite/excel": "^3.1",
         "psr/simple-cache": "2.0",
+        "sparkinzy/dcat-extension-client": "^1.0",
         "sparkinzy/dcat-viewer": "^1.0"
     },
     "require-dev": {
